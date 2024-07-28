@@ -83,17 +83,13 @@ public class Snake
 
             switch (input.Key)
             {
-                case ConsoleKey.A:
-                    _direction = Vector2.Left;
+                case ConsoleKey.A: _direction = Vector2.Left;
                     break;
-                case ConsoleKey.D:
-                    _direction = Vector2.Right;
+                case ConsoleKey.D: _direction = Vector2.Right;
                     break;
-                case ConsoleKey.W:
-                    _direction = Vector2.Up;
+                case ConsoleKey.W: _direction = Vector2.Up;
                     break;
-                case ConsoleKey.S:
-                    _direction = Vector2.Down;
+                case ConsoleKey.S: _direction = Vector2.Down;
                     break;
             }
         }
