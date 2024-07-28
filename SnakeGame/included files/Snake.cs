@@ -37,7 +37,7 @@ public class Snake
             DisplayArea();
             Thread.Sleep(_difficulty);
             Console.Clear();
-            MoveHead();
+            MoveSnake();
             OnDefeat();
             OnEatApple();
         }
@@ -82,7 +82,7 @@ public class Snake
         Console.WriteLine();
     }
 
-    private void MoveHead()
+    private void MoveSnake()
     {
         if (Console.KeyAvailable)
         {
