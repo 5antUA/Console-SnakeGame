@@ -10,7 +10,7 @@ public class Snake
     private Vector2 _headPosition;
     private Vector2 _applePosition;
     private Vector2 _direction;
-    private List<Vector2> _tail;
+    private List<Vector2> _tailList;
 
     public int AreaWidth { get; private set; }
     public int AreaHeight { get; private set; }
@@ -24,7 +24,7 @@ public class Snake
         _difficulty = (int)(difficulty * 1000);
         _headPosition = new Vector2(AreaWidth / 2, AreaHeight / 2);
         _direction = Vector2.Right;
-        _tail = new List<Vector2>();
+        _tailList = new List<Vector2>();
     }
 
     public void Start()
@@ -34,18 +34,16 @@ public class Snake
 
         while (_isAlive)
         {
-            BuildArea();
+            DisplayArea();
             Thread.Sleep(_difficulty);
             Console.Clear();
             MoveHead();
             OnDefeat();
             OnEatApple();
         }
-
-        Console.WriteLine("GAME OVER !");
     }
 
-    private void BuildArea()
+    private void DisplayArea()
     {
         Console.WriteLine(this);
 
@@ -55,18 +53,27 @@ public class Snake
             {
                 if (x == 0 || y == 0 || x == AreaWidth - 1 || y == AreaHeight - 1)
                 {
+                    // borders
                     Console.Write("# ");
                 }
                 else if (x == _headPosition.x && y == _headPosition.y)
                 {
+                    // snake head
                     Console.Write("@ ");
+                }
+                else if (_tailList.Contains(new Vector2(x, y)))
+                {
+                    // snake tail
+                    Console.Write("o ");
                 }
                 else if (x == _applePosition.x && y == _applePosition.y)
                 {
+                    // apple
                     Console.Write("* ");
                 }
                 else
                 {
+                    // empty space
                     Console.Write("  ");
                 }
             }
@@ -94,6 +101,15 @@ public class Snake
             }
         }
 
+        if (_tailList.Count > 0)
+        {
+            for (int i = _tailList.Count - 1; i > 0; i--)
+            {
+                _tailList[i] = _tailList[i - 1];
+            }
+            _tailList[0] = _headPosition;
+        }
+
         _headPosition += _direction;
     }
 
@@ -102,6 +118,7 @@ public class Snake
         if (_headPosition == _applePosition)
         {
             _score++;
+            _tailList.Add(_headPosition);
             GenerateApple();
         }
     }
@@ -115,7 +132,8 @@ public class Snake
             randX = new Random().Next(1, AreaWidth - 1);
             randY = new Random().Next(1, AreaHeight - 1);
         }
-        while (randX == _headPosition.x && randY == _headPosition.y);
+        while (_headPosition == new Vector2(randX, randY) || 
+                _tailList.Contains(new Vector2(randX, randY)));
 
         _applePosition = new Vector2(randX, randY);
     }
@@ -123,7 +141,8 @@ public class Snake
     private void OnDefeat()
     {
         if (_headPosition.x == 0 || _headPosition.y == 0 ||
-            _headPosition.x == AreaWidth - 1 || _headPosition.y == AreaHeight - 1)
+            _headPosition.x == AreaWidth - 1 || _headPosition.y == AreaHeight - 1 ||
+            _tailList.Contains(_headPosition))
         {
             _isAlive = false;
         }
@@ -131,11 +150,11 @@ public class Snake
 
     public override string ToString()
     {
-        string resultStr =
+        string gameStateInfo =
             $"Head position : ({_headPosition.x}; {_headPosition.y}) \n" +
             $"Area size : {AreaHeight}x{AreaWidth} \n" +
             $"Player score : {_score}  \n";
 
-        return resultStr;
+        return gameStateInfo;
     }
 }

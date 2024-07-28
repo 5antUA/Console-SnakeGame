@@ -44,8 +44,7 @@
         if (!(obj is Vector2))
             return false;
 
-        Vector2 other = (Vector2)obj;
-        return this == other;
+        return this == (Vector2)obj;
     }
 
     public override int GetHashCode()
