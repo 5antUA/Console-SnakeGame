@@ -7,10 +7,10 @@ public class Snake
     private bool _isAlive;
     private int _score;
     private int _difficulty;
-    private Vector2 _headPosition;
-    private Vector2 _applePosition;
-    private Vector2 _direction;
-    private List<Vector2> _tailList;
+    private Vector _headPosition;
+    private Vector _applePosition;
+    private Vector _direction;
+    private List<Vector> _tailList;
 
     public int AreaWidth { get; private set; }
     public int AreaHeight { get; private set; }
@@ -22,9 +22,9 @@ public class Snake
         AreaHeight = height;
 
         _difficulty = (int)(difficulty * 1000);
-        _headPosition = new Vector2(AreaWidth / 2, AreaHeight / 2);
-        _direction = Vector2.Right;
-        _tailList = new List<Vector2>();
+        _headPosition = new Vector(AreaWidth / 2, AreaHeight / 2);
+        _direction = Vector.Right;
+        _tailList = new List<Vector>();
     }
 
     public void Start()
@@ -61,7 +61,7 @@ public class Snake
                     // snake head
                     Console.Write("@ ");
                 }
-                else if (_tailList.Contains(new Vector2(x, y)))
+                else if (_tailList.Contains(new Vector(x, y)))
                 {
                     // snake tail
                     Console.Write("o ");
@@ -90,13 +90,13 @@ public class Snake
 
             switch (input.Key)
             {
-                case ConsoleKey.A: _direction = Vector2.Left;
+                case ConsoleKey.A: _direction = Vector.Left;
                     break;
-                case ConsoleKey.D: _direction = Vector2.Right;
+                case ConsoleKey.D: _direction = Vector.Right;
                     break;
-                case ConsoleKey.W: _direction = Vector2.Up;
+                case ConsoleKey.W: _direction = Vector.Up;
                     break;
-                case ConsoleKey.S: _direction = Vector2.Down;
+                case ConsoleKey.S: _direction = Vector.Down;
                     break;
             }
         }
@@ -132,10 +132,10 @@ public class Snake
             randX = new Random().Next(1, AreaWidth - 1);
             randY = new Random().Next(1, AreaHeight - 1);
         }
-        while (_headPosition == new Vector2(randX, randY) || 
-                _tailList.Contains(new Vector2(randX, randY)));
+        while (_headPosition == new Vector(randX, randY) || 
+                _tailList.Contains(new Vector(randX, randY)));
 
-        _applePosition = new Vector2(randX, randY);
+        _applePosition = new Vector(randX, randY);
     }
 
     private void OnDefeat()
