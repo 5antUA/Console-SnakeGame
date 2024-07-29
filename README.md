@@ -1,3 +1,7 @@
+<p align="center">
+  <b>About game</b>
+</p>
+
 A simple SnakeGame developed as a console application using the C# programming language.
 
 The application contains three .cs files in the "included files" folder:
