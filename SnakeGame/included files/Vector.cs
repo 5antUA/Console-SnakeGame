@@ -8,7 +8,7 @@
     public static Vector Right = new Vector(1, 0);
     public static Vector Left = new Vector(-1, 0);
 
-    public Vector(int x, int y)
+    public Vector(int x = 0, int y = 0)
     {
         this.x = x;
         this.y = y;
