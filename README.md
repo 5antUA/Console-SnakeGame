@@ -1,4 +1,4 @@
-The "Snake" game which is developed in a console application using the C# programming language.
+A simple SnakeGame developed as a console application using the C# programming language.
 
 The application contains 3 .cs files:
 * Program.cs - the entry point of the application and containing the Main() function;
