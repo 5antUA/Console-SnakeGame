@@ -1,7 +1,7 @@
 The "Snake" game which is developed in a console application using the C# programming language.
 
 The application contains 3 .cs files:
-* Program.cs - the entry point of the application and containing the "Main" function;
+* Program.cs - the entry point of the application and containing the Main() function;
 * Snake.cs - game data and game logic;
 * Vector.cs - a struct for storing two variables X and Y that represent a point in the coordinate area.
 
