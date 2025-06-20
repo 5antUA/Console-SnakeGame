@@ -1,6 +1,4 @@
-<p align="center">
-  <b>About game</b>
-</p>
+# About game
 
 A simple SnakeGame developed as a console application using the C# programming language.
 
